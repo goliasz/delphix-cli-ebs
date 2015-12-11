@@ -1,0 +1,18 @@
+database provision
+defaults
+set type=TimeflowPointSemantic
+set container="VIS"
+set location=LATEST_SNAPSHOT
+commit
+set container.name=VISDEV
+set container.group="Targets"
+set source.mountBase="/u01/provision"
+set sourceConfig.type=OracleSIConfig
+set sourceConfig.databaseName=VISDEV
+set sourceConfig.uniqueName=VISDEV
+edit sourceConfig.instance
+set instanceNumber=1
+set instanceName=VISDEV
+back
+set sourceConfig.repository="ebstrg10/'/u01/oracle/VISDEV/db/tech_st/11.1.0'"
+commit
