@@ -1,0 +1,77 @@
+database provision
+defaults
+set type=TimeflowPointSemantic
+set location=LATEST_SNAPSHOT
+set container="VIS dbStack"
+commit
+set container.name="VISDEV dbStack"
+set container.group="Targets"
+set source.parameters.appsPassword=apps
+set source.parameters.display="ebstrg10:0.0"
+set source.parameters.oracleHome="db/tech_st/11.1.0"
+set source.parameters.targetSystemHostname="ebstrg10"
+set source.parameters.targetSystemPortPool=1
+set source.parameters.targetSystemSid="VISDEV"
+set source.parameters.targetSystemUtlFileDir="/var/tmp"
+set source.name="VISDEV dbStack"
+set sourceConfig.name="VISDEV dbStack"
+set sourceConfig.path="/u01/oracle/VISDEV"
+set sourceConfig.repository="ebstrg10/E-Business Suite R12.1 dbTechStack"
+edit sourceConfig.parameters
+add
+set definition.name=foo
+set definition.description=foo
+set definition.prettyName=foo
+set value=false
+commit
+
+database provision
+defaults
+set type=TimeflowPointSemantic
+set container="VIS"
+set location=LATEST_SNAPSHOT
+commit
+set container.name=VISDEV
+set container.group="Targets"
+set source.mountBase="/u01/provision"
+set sourceConfig.type=OracleSIConfig
+set sourceConfig.databaseName=VISDEV
+set sourceConfig.uniqueName=VISDEV
+edit sourceConfig.instance
+set instanceNumber=1
+set instanceName=VISDEV
+back
+set sourceConfig.repository="ebstrg10/'/u01/oracle/VISDEV/db/tech_st/11.1.0'"
+commit
+
+database provision
+defaults
+set type=TimeflowPointSemantic
+set location=LATEST_SNAPSHOT
+set container="VIS appsTier"
+commit
+set container.name="VISDEV appsTier"
+set container.group="Targets"
+set source.name="VISDEV appsTier"
+set source.parameters.appsPassword=apps
+set source.parameters.display="ebstrg20:0.0"
+set source.parameters.commonTop="apps/apps_st/comn"
+set source.parameters.instTop="/u01/oracle/inst"
+set source.parameters.oracleHome="apps/tech_st/10.1.3"
+set source.parameters.targetSystemDatabaseDomainName="kolibero.local"
+set source.parameters.targetSystemDatabaseServerNode="ebstrg10"
+set source.parameters.targetSystemHostname="ebstrg20"
+set source.parameters.targetSystemPortPool=1
+set source.parameters.targetSystemSid="VISDEV"
+edit source.operations.configureClone
+add
+set command="sh /home/oracle/VISDEV_post_clone.sh"
+back
+back
+set sourceConfig.name="VISDEV appsTier"
+set sourceConfig.path="/u01/oracle/VISDEV"
+set sourceConfig.repository="ebstrg20/E-Business Suite R12.1 appsTier"
+edit sourceConfig.parameters
+back
+commit
+

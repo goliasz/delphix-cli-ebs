@@ -1,0 +1,31 @@
+database provision
+defaults
+set type=TimeflowPointSemantic
+set location=LATEST_SNAPSHOT
+set container="VIS appsTier"
+commit
+set container.name="VISDEV appsTier"
+set container.group="Targets"
+set source.name="VISDEV appsTier"
+set source.parameters.appsPassword=apps
+set source.parameters.display="ebstrg20:0.0"
+set source.parameters.commonTop="apps/apps_st/comn"
+set source.parameters.instTop="/u01/oracle/inst"
+set source.parameters.oracleHome="apps/tech_st/10.1.3"
+set source.parameters.targetSystemDatabaseDomainName="kolibero.local"
+set source.parameters.targetSystemDatabaseServerNode="ebstrg10"
+set source.parameters.targetSystemHostname="ebstrg20"
+set source.parameters.targetSystemPortPool=1
+set source.parameters.targetSystemSid="VISDEV"
+edit source.operations.configureClone
+add
+set command="sh /home/oracle/VISDEV_post_clone.sh"
+back
+back
+set sourceConfig.name="VISDEV appsTier"
+set sourceConfig.path="/u01/oracle/VISDEV"
+set sourceConfig.repository="ebstrg20/E-Business Suite R12.1 appsTier"
+edit sourceConfig.parameters
+back
+commit
+

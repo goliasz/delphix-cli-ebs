@@ -1,0 +1,27 @@
+database provision
+defaults
+set type=TimeflowPointSemantic
+set location=LATEST_SNAPSHOT
+set container="VIS dbStack"
+commit
+set container.name="VISDEV dbStack"
+set container.group="Targets"
+set source.parameters.appsPassword=apps
+set source.parameters.display="ebstrg10:0.0"
+set source.parameters.oracleHome="db/tech_st/11.1.0"
+set source.parameters.targetSystemHostname="ebstrg10"
+set source.parameters.targetSystemPortPool=1
+set source.parameters.targetSystemSid="VISDEV"
+set source.parameters.targetSystemUtlFileDir="/var/tmp"
+set source.name="VISDEV dbStack"
+set sourceConfig.name="VISDEV dbStack"
+set sourceConfig.path="/u01/oracle/VISDEV"
+set sourceConfig.repository="ebstrg10/E-Business Suite R12.1 dbTechStack"
+edit sourceConfig.parameters
+add
+set definition.name=foo
+set definition.description=foo
+set definition.prettyName=foo
+set value=false
+commit
+

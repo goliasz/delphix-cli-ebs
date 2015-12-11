@@ -1,0 +1,11 @@
+database "VISDEV appsTier"
+delete
+set force=true
+commit
+database "VISDEV"
+delete
+commit
+database "VISDEV dbStack"
+delete
+commit
+
